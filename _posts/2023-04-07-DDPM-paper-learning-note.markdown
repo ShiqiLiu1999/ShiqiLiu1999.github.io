@@ -9,8 +9,7 @@ img-url: 2023-04-07-DDPM-paper-learning-note\
 
 * TOC
 {:toc}
-
-## 1.Learning Motivation
+Urban Mining and the CDW Circular Economy
 
 Recently, AI model has a great impact on the field of art. The drawing bot "Midjourney" is performing impressivly.
 With a simple text input, the model will generate an image that fits our need very well.
@@ -362,10 +361,11 @@ $$\begin{aligned}
 &= \mathbb{E}_{q} [\log \frac{q(X_T|X_0)}{p_{\theta}(X_T)} + \sum_{t=2}^{T}\log\frac{q(X_{t-1}|X_t, X_0)}{p_{\theta}(X_{t-1} | X_t)} - \log p_{\theta}(X_0 | X_1)]\\
 &= \mathbb{E}_{q} 
 [\begin{matrix} \underbrace{D_{KL}(q(X_T|X_0)||p_{\theta}(X_T))} \\ L_T \end{matrix} 
+
 + \begin{matrix} \underbrace{\sum_{t=2}^{T} D_{KL}(q(X_{t-1}|X_t, X_0)||p_{\theta}(X_{t-1} | X_t)) } \\ L_{T-1 : 1} \end{matrix} + 
  \begin{matrix} \underbrace{- \log p_{\theta}(X_0 | X_1)}\\ L_{0} \end{matrix}]
   \end{aligned}$$
- {% endraw %}
+  {% endraw %}
 
 Now the upper bound of the crocess entropy can be written as:
 
