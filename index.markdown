@@ -38,11 +38,11 @@ layout: home
 
 
 <div id = "sections">
-    <a href = "/about/">
+    <!-- <a href = "/about/">
         <div>
             <span>About me</span>
-        </div>
-    </a>
+        </div> -->
+    <!-- </a> -->
     <a href = "/posts/">
         <div>
             <span>Blogs</span>

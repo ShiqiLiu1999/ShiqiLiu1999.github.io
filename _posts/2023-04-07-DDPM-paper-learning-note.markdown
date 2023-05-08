@@ -7,9 +7,7 @@ toc: true
 img-url: 2023-04-07-DDPM-paper-learning-note\
 ---
 
-* TOC
-{:toc}
-Urban Mining and the CDW Circular Economy
+# Urban Mining and the CDW Circular Economy
 
 Recently, AI model has a great impact on the field of art. The drawing bot "Midjourney" is performing impressivly.
 With a simple text input, the model will generate an image that fits our need very well.
