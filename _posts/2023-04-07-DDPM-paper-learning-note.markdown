@@ -4,7 +4,7 @@ title:  "DDPM Paper Learning Note"
 date:   2023-04-07
 categories: jekyll update
 toc: true
-img-url: 2023-04-07-DDPM-paper-learning-note\
+img-url: 2023-05-07-Urban Mining and the CDW Circular Economy\
 ---
 
 # Urban Mining and the CDW Circular Economy
