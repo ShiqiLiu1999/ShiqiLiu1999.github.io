@@ -27,7 +27,7 @@ The CDW circular economy seeks to address these issues by promoting the recovery
 
 Our objective is to support urban mining companies in estimating the transportation costs and greenhouse gas (GHG) emissions for both their standard and recycled processes, based on the total distance covered in miles and the amount of materials transported in tons.
 
-To determine the transportation cost, we factor in various expenses such as fuel fee, tipping fee, landfilling and disposal costs, and truck rental charges. By adding these costs together, we can determine the transportation cost per ton of material.
+To determine the transportation cost, we factor in various expenses such as fuel cost, tipping fee, landfilling and disposal costs, and truck rental charges. By adding these costs together, we can determine the transportation cost per ton of material.
 
 In addition to transportation costs, we also calculate GHG emissions. To calculate GHG emissions, we multiply the amount of fuel used by 0.43, based on the estimate by the U.S. Environmental Protection Agency (EPA) that diesel fuel produces approximately 0.43 kg of CO2 emissions per liter. This calculation provides us with the average GHG emissions per ton of material.
 
