@@ -1,13 +1,14 @@
 ---
 layout: post
 title:  "Urban Mining and the CDW Circular Economy"
+
 date:   2023-05-07
 categories: jekyll update
 toc: true
 img-url: 2023-04-07-DDPM-paper-learning-note\
 ---
 
-# Background
+## Background
 
 Urban mining is the process of recovering valuable resources from electronic waste, construction and demolition waste, and other types of urban waste. It is an important concept in the circular economy, which aims to reduce waste, conserve resources, and promote sustainable development. The circular economy seeks to move away from the traditional "take-make-dispose" linear model of production and consumption, and towards a more sustainable model that prioritizes the reuse, recycling, and repurposing of materials.
 
@@ -38,20 +39,10 @@ The CDW circular economy seeks to address these issues by promoting the recovery
 </div>
 
 <br/>
-## 2.Background
 
-There are 3 papers I found which are related to this topic.
+# Introduction
 
-- <h4>Deep unsupervised learning using nonequilibrium thermodynamics (2015)</h4>
-by Jascha Sohl-Dickstein, Eric Weiss, Niru Maheswaranathan, and Surya Ganguli.
 
-- <h4>Denoising Diffusion Probabilistic Models (2020)</h4>
-by Jonathan Ho, Ajay Jain, Pieter Abbeel
-
-- <h4>Hierarchical Text-Conditional Image Generation with CLIP Latents (2022)</h4>
-by Aditya Ramesh, Prafulla Dhariwal, Alex Nichol, Casey Chu, Mark Chen
-
-I will briefly introduce them in the following sections.
 
 ### 2.1 Deep unsupervised learning using nonequilibrium thermodynamics (2015)
 
