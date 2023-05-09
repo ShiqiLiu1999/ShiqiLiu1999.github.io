@@ -115,4 +115,5 @@ component of concrete. We have created a prototype cost and GHG savings
 
 </script>
 
-## Sensitivity Analysis (Jamaica Hospital Case)
+On May 11, 2023, we presented our project (<a href="https://docs.google.com/presentation/d/1u4ESZFcWbqluNVV56ZAIvwG5yfNh3zSkRwh8YghLT-o/edit?usp=sharing">Urban Mining and the CDW Circular Economy</a>) at Town+Gown’s symposium event URR.10:
+Urban Mining and the CDW Circular Economy: Port Authority Case Study in Action.
