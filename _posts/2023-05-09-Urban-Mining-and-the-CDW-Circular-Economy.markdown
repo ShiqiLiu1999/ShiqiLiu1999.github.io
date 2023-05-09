@@ -46,12 +46,12 @@ In addition to transportation costs, we also calculate GHG emissions. To calcula
 
 <label for="input-box-dis">Total Distance (Mile):</label>
 <input type="text" id="input-box-dis" name="number">
-<button onclick="calculate_transp_cost()">Calculate Transp Cost</button> 
+<button onclick="calculate_transp_cost()">Transp Cost-Standard Process</button> 
 <p id="result_total_cost_standard"></p>
 
 <label for="input-box-amt">Amount of Material (Ton):</label>
 <input type="text" id="input-box-amt" name="number">
-<button onclick="calculate_transp_cost()">Calculate Transp Cost</button>
+<button onclick="calculate_transp_cost()">Transp Cost-Recyled Process</button>
 <p id="result_total_cost_recycled"></p>
 
 <script>
