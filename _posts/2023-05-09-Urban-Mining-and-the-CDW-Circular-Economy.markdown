@@ -33,16 +33,13 @@ To determine the transportation cost, we factor in various expenses such as fuel
 
 In addition to transportation costs, we also calculate GHG emissions. To calculate GHG emissions, we multiply the amount of fuel used by 0.43, based on the estimate by the U.S. Environmental Protection Agency (EPA) that diesel fuel produces approximately 0.43 kg of CO2 emissions per liter. This calculation provides us with the average GHG emissions per ton of material.
 
-<div class="blog-only-image">
+<div class="blog-only-image" style="margin-bottom: 20px;">
     <img src="{{ site.blog-img-url }}{{ page.img-url }}GHG.png">
 </div>
 
 ## Calculator
-<!-- <label for="input-box">Total Distance (Mile):</label>
-<input type="text" id="input-box" name="name">
 
-<label for="input-box">Amount of Material (Ton):</label>
-<input type="text" id="input-box" name="name"> -->
+# Transportation Cost
 
 <label for="input-box-dis">Total Distance (Mile):</label>
 <input type="text" id="input-box-dis" name="number">
@@ -81,5 +78,43 @@ In addition to transportation costs, we also calculate GHG emissions. To calcula
 
 </script>
 
+# Greenhouse Gas (GHG) emission
+
+<label for="input-box-dis">Total Distance (Mile):</label>
+<input type="text" id="input-box-dis" name="number">
+<button onclick="calculate_emission()">GHG Emission-Standard Process</button> 
+<p id="result_emission_standard"></p>
+
+<label for="input-box-amt">Amount of Material (Ton):</label>
+<input type="text" id="input-box-amt" name="number">
+<button onclick="calculate_emission()">GHG Emission-Recyled Process</button>
+<p id="result_emission_recycled"></p>
+
+<script>
+  function calculate_emission() {
+    // Get a reference to the input box
+    const inputBox1 = document.getElementById("input-box-dis");
+    const inputBox2 = document.getElementById("input-box-amt");
+
+    // Retrieve the value of the input box
+    const dis = inputBox1.value;
+    const amt = inputBox2.value;
+
+    // Process the input using a formula
+    const total_emission_standard = Math.ceil(amt/22,0)*dis/4*1.62772;
+    // const avg_transp_cost_standard = total_transp_cost_standard/amt;
+    const total_emission_recycled = Math.ceil(amt/40,0)*dis/3.5*1.62772;
+    // const avg_total_transp_cost_recycled = total_transp_cost_recycled/amt
+
+    // Output the result to the user
+
+    const result_emission_standard = document.getElementById("result_emission_standard");
+    result_emission_standard.textContent = `The total GHG emission in standard process is ${total_emission_standard} Kg.`;
+    
+    const result_emission_recycled = document.getElementById("result_emission_recycled");
+    result_total_emission_recycled.textContent = `The total GHG emission in recycled process is ${total_emission_recycled} Kg.`;
+  }
+
+</script>
 
 ## Sensitivity Analysis (Jamaica Hospital Case)
