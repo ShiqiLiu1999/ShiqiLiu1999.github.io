@@ -112,7 +112,7 @@ In addition to transportation costs, we also calculate GHG emissions. To calcula
     result_emission_standard.textContent = `The total GHG emission in standard process is ${total_emission_standard} Kg.`;
     
     const result_emission_recycled = document.getElementById("result_emission_recycled");
-    result_total_emission_recycled.textContent = `The total GHG emission in recycled process is ${total_emission_recycled} Kg.`;
+    result_emission_recycled.textContent = `The total GHG emission in recycled process is ${total_emission_recycled} Kg.`;
   }
 
 </script>
