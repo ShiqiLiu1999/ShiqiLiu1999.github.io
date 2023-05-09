@@ -29,8 +29,15 @@ Our objective is to support urban mining companies in estimating the transportat
 
 To determine the transportation cost, we factor in various expenses such as fuel cost, tipping fee, landfilling and disposal costs, and truck rental charges. By adding these costs together, we can determine the transportation cost per ton of material.
 
+<div class="blog-only-image">
+    <img src="{{ site.blog-img-url }}{{ page.img-url }}Truck.png">
+</div>
+
 In addition to transportation costs, we also calculate GHG emissions. To calculate GHG emissions, we multiply the amount of fuel used by 0.43, based on the estimate by the U.S. Environmental Protection Agency (EPA) that diesel fuel produces approximately 0.43 kg of CO2 emissions per liter. This calculation provides us with the average GHG emissions per ton of material.
 
+<div class="blog-only-image">
+    <img src="{{ site.blog-img-url }}{{ page.img-url }}GHG.png">
+</div>
 
 ## Calculator
 <!-- <label for="input-box">Total Distance (Mile):</label>
