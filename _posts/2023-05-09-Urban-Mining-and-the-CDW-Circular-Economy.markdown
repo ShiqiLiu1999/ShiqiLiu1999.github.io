@@ -97,6 +97,57 @@ component of concrete. We have created a prototype cost and GHG savings
 
 <label for="input-box-p"> Percent of Sand from Soil (Ton):</label>
 <input type="text" id="input-box-p" name="number">
+<button onclick="calculate_recycled_process()">Get Transportation Cost and Emission</button>
+
+<script>
+  function calculate_recycled_process() {
+    // Get a reference to the input box
+    const inputBox1 = document.getElementById("input-box-dis1");
+    const inputBox2 = document.getElementById("input-box-dis2");
+    const inputBox3 = document.getElementById("input-box-total_amt");
+    const inputBox4 = document.getElementById("input-box-p");
+
+    // Retrieve the value of the input box
+    const dis1 = inputBox1.value;
+    const dis2 = inputBox2.value;
+    const amt = inputBox3.value;
+    const p = inputBox4.value;
+
+    // Process the input using a formula
+    const transp_cost_recycled = (dis1/3.5*3.4*Math.ceil(amt/38)+amt*10+Math.ceil(amt/38)*dis1/25*100+dis2/3.5*3.4*Math.ceil(amt*p/38)+Math.ceil(amt*p/38)*dis1/25*100+amt*p*10)/amt;
+    // const avg_transp_cost_standard = total_transp_cost_standard/amt;
+    const emission_recycled = (Math.ceil(amt/38)*dis1/3.5*1.62772+Math.ceil(amt*p/38)*dis2/3.5*1.6277263)/amt;
+    // const avg_total_transp_cost_recycled = total_transp_cost_recycled/amt
+
+    // Output the result to the user
+
+    const result_emission_standard = document.getElementById("result_avg_cost_recycled");
+    result_emission_standard.textContent = `The average transportation cost per ton of material in recyled process will cost $${transp_cost_recycled}.`;
+    
+    const result_emission_recycled = document.getElementById("result_emission_recycled");
+    result_emission_recycled.textContent = `The average GHG emission per ton of material in recycled process is ${emission_recycled} Kg.`;
+  }
+</script>
+
+
+
+
+
+
+<!-- <label for="input-box-dis1">Distance_1 (Mile):</label>
+<input type="text" id="input-box-dis1" name="number">
+
+<label for="input-box-dis2">Distance_2 (Mile):</label>
+<input type="text" id="input-box-dis2" name="number">
+<p id="result_avg_cost_recycled"></p>
+
+<label for="input-box-total_amt">Amount of Material (Ton):</label>
+<input type="text" id="input-box-total_amt" name="number">
+
+<p id="result_emission_recycled"></p>
+
+<label for="input-box-p"> Percent of Sand from Soil (Ton):</label>
+<input type="text" id="input-box-p" name="number">
 <button onclick="calculate_recyled_process()">Get Transportation Cost and Emission</button>
 
 <script>
@@ -128,7 +179,7 @@ component of concrete. We have created a prototype cost and GHG savings
     result_emission_recycled.textContent = `The average GHG emission per ton of material in recycled process is ${emission_recycled} Kg.`;
   }
 
-</script>
+</script> -->
 
 On May 11, 2023, we presented our project (<a href="https://docs.google.com/presentation/d/1u4ESZFcWbqluNVV56ZAIvwG5yfNh3zSkRwh8YghLT-o/edit?usp=sharing">Urban Mining and the CDW Circular Economy</a>) at Town+Gown’s symposium event URR.10:
 Urban Mining and the CDW Circular Economy: Port Authority Case Study in Action.
