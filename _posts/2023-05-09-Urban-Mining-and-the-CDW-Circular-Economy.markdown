@@ -80,13 +80,9 @@ In addition to transportation costs, we also calculate GHG emissions. To calcula
 
 # Greenhouse Gas (GHG) emission
 
-<label for="input-box-dis">Total Distance (Mile):</label>
-<input type="text" id="input-box-dis" name="number">
 <button onclick="calculate_emission()">GHG Emission-Standard Process</button> 
 <p id="result_emission_standard"></p>
 
-<label for="input-box-amt">Amount of Material (Ton):</label>
-<input type="text" id="input-box-amt" name="number">
 <button onclick="calculate_emission()">GHG Emission-Recyled Process</button>
 <p id="result_emission_recycled"></p>
 
