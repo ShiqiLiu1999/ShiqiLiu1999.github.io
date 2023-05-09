@@ -26,11 +26,36 @@ In this paper, the author manage to Destory the data by diffusion, and then lear
 yielding a highly flexible and tractable generative model of the data.
 
 
-<label for="input-box">Total Distance (Mile):</label>
+<!-- <label for="input-box">Total Distance (Mile):</label>
 <input type="text" id="input-box" name="name">
 
 <label for="input-box">Amount of Material (Ton):</label>
-<input type="text" id="input-box" name="name">
+<input type="text" id="input-box" name="name"> -->
+
+<label for="input-box">Enter a number:</label>
+<input type="text" id="input-box" name="number">
+<button onclick="calculate()">Calculate Square</button>
+<p id="result"></p>
+
+<script>
+  function calculate() {
+    // Get a reference to the input box
+    const inputBox = document.getElementById("input-box");
+
+    // Retrieve the value of the input box
+    const number = inputBox.value;
+
+    // Process the input using a formula
+    const result = number * number;
+
+    // Output the result to the user
+    const resultBox = document.getElementById("result");
+    resultBox.textContent = `The square of ${number} is ${result}.`;
+  }
+</script>
+
+
+
 
 
 ### 2.3 Hierarchical Text-Conditional Image Generation with CLIP Latents (2022)
