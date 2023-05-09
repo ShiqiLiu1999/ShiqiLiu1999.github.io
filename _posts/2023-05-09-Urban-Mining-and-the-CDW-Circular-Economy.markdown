@@ -9,19 +9,12 @@ img-url: 2023-05-09-Urban-Mining-and-the-CDW-Circular-Economy\
 
 ## Background
 
-Urban mining is the process of recovering valuable resources from what is considered
-waste, such as construction and demolition waste (CDW). It is an important concept that
-supports creation of a circular economy, which aims to reduce waste, conserve
-resources, and promote sustainable development. The circular economy seeks to move
-away from the traditional “take-make-dispose” linear model of production and
-consumption, and towards a more sustainable model that prioritizes the reuse,
-recycling, and repurposing of materials.
+Urban mining is the process of recovering valuable resources from what is considered waste, such as construction and demolition waste (CDW). It is an important concept that supports creation of a circular economy, which aims to reduce waste, conserve resources, and promote sustainable development. The circular economy seeks to move away from the traditional “take-make-dispose” linear model of production and consumption, and towards a more sustainable model that prioritizes the reuse, recycling, and repurposing of materials.
 
-CDW is a significant source of urban waste, estimated in New York State to account for
-46% of the State’s total waste stream (Draft New York State Solid Waste Management
-Plan, pp. 9, 20, at <a href="https://www.dec.ny.gov/docs/materials_minerals_pdf/draftsswmp.pdf">This is a link</a>)
-CDW includes materials such as excavated soil, concrete, bricks, wood, metals and
+CDW is a significant source of urban waste, estimated in New York State to account for 46% of the State’s total waste stream (Draft New York State Solid Waste Management Plan, pp. 9, 20, at <a href="https://www.dec.ny.gov/docs/materials_minerals_pdf/draftsswmp.pdf">https://www.dec.ny.gov/docs/materials_minerals_pdf/draftsswmp.pdf)</a>) CDW includes materials such as excavated soil, concrete, bricks, wood, metals and
 glass, much of which are often disposed of in landfills.
+
+New York State’s Part 360 beneficial use designation (BUD) regulations aim to divert these materials from landfills toward direct re-use or toward processing for re-use in new construction materials. The State’s BUDs support the creation of a CDW circular economy using the urban mining concept to support the recovery, reuse, and recycling of CDW materials. Other mechanisms to support a circular CDW economy would involve designing buildings and infrastructure for disassembly and recovery, creating markets for recycled materials, promoting deconstruction rather than demolition, and improving the efficiency of waste management systems. By adopting a circular economy approach to CDW, we can reduce waste, conserve resources, and create new economic opportunities, while also reducing environmental impacts and improving sustainability.
 
 <div class="blog-only-image" style="margin-bottom: 20px;">
     <img src="{{ site.blog-img-url }}{{ page.img-url }}Constructions.png">
@@ -31,21 +24,22 @@ glass, much of which are often disposed of in landfills.
 ## Introduction
 
 
-Our objective is to support urban mining companies in estimating the transportation costs and greenhouse gas (GHG) emissions for both their standard and recycled processes, based on the total distance covered in miles and the amount of materials transported in tons.
+Our objective is to develop a model that permits comparison of direct cost (primarily transportation related) and GHG emissions savings from local processing and local reuse of CDW materials (the recycled process) to the direct costs and GHG emissions of sending these materials to landfills (the standard process). We based the model on a hypothetical excavation in Jamaica Queens, with the excavated soil transported to a Long Island rock wash plant that produced clean sand for use in new concrete at a nearby batch concrete plant. The model we developed permits a comparison between the hypothetical local recovery and reuse of excavated soil and the standard process of sending the excavated soil to Pennsylvania, where many landfills take CDW from New
+York..
 
-To determine the transportation cost, we factor in various expenses such as fuel cost, tipping fee, landfilling and disposal costs, and truck rental charges. By adding these costs together, we can determine the transportation cost per ton of material.
+The model for the hypothetical case study (<a href="https://docs.google.com/spreadsheets/d/1439GZQQ7Zko0tlztk9GlA12wQrmT_APnIGqUQmlOEc4/edit#gid=416468233">Rock Tech</a>) uses data for various expenses such as fuel cost, tipping/disposal fee and disposal costs, and trucking costs and truck weight limits, along with milage, to determine the transportation costs of the two options. The model also calculates GHC emissions associated with the two options, which to determine GHG emissions savings of the local CDW re-use option. The GHG emissions calculation was based on the estimate by the U.S. Environmental Protection Agency (EPA) that diesel fuel produces approximately 0.43 kg of CO2 emissions per liter and permitted us to calculate the average GHG emissions per ton of material.
 
 <div class="blog-only-image">
     <img src="{{ site.blog-img-url }}{{ page.img-url }}Truck.png">
 </div>
 
-In addition to transportation costs, we also calculate GHG emissions. To calculate GHG emissions, we multiply the amount of fuel used by 0.43, based on the estimate by the U.S. Environmental Protection Agency (EPA) that diesel fuel produces approximately 0.43 kg of CO2 emissions per liter. This calculation provides us with the average GHG emissions per ton of material.
-
-<div class="blog-only-image" style="margin-bottom: 20px;">
-    <img src="{{ site.blog-img-url }}{{ page.img-url }}GHG.png">
-</div>
 
 ## Calculator
+
+This case study model provides the basis for comparing different options for CDW
+materials that can be re-used in locally produced concrete and cement, which is a
+component of concrete. We have created a prototype cost and GHG savings
+“calculator” below to demonstrate the potential to expand the model and methodology for local recovery and reuse of other CDW materials.
 
 # Transportation Cost
 
