@@ -56,9 +56,9 @@ yielding a highly flexible and tractable generative model of the data.
 
     // Process the input using a formula
     const total_transp_cost_standard = dis/4*3.4*Math.ceil(amt/22,0)+amt*12+amt*44+Math.ceil(amt/22,0)*(dis/30)*100;
-    const avg_transp_cost_standard = total_transp_cost_standard/amt;
-    const total_transp_cost_recycled = dis/3.5*3.4*Math.ceil(amt/40,0)+amt*10+Math.ceil(amt/40,0)*dis/25*100;
-    const avg_total_transp_cost_recycled = total_transp_cost_recycled/amt
+    // const avg_transp_cost_standard = total_transp_cost_standard/amt;
+    // const total_transp_cost_recycled = dis/3.5*3.4*Math.ceil(amt/40,0)+amt*10+Math.ceil(amt/40,0)*dis/25*100;
+    // const avg_total_transp_cost_recycled = total_transp_cost_recycled/amt
 
     // Output the result to the user
     const result_total_cost_standard = document.getElementById("total_transp_cost_standard");
