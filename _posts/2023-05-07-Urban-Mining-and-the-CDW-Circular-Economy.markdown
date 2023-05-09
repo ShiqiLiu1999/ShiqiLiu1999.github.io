@@ -19,12 +19,6 @@ The CDW circular economy seeks to address these issues by promoting the recovery
 
 <div class = "blog-image">
     <div>
-        <img src= "{{ site.blog-img-url }}{{ page.img-url }}1-1.png">
-    </div>
-</div>
-<br/>
-<div class = "blog-image">
-    <div>
         <img src="{{ site.blog-img-url }}{{ page.img-url }}1-2.jpg">
     </div>
     <div>
@@ -36,10 +30,6 @@ The CDW circular economy seeks to address these issues by promoting the recovery
 <br/>
 
 ## Introduction
-
-
-
-### 2.1 Deep unsupervised learning using nonequilibrium thermodynamics (2015)
 
 In this paper, the author manage to Destory the data by diffusion, and then learn a reverse diffusion process that restores structure in data,
 yielding a highly flexible and tractable generative model of the data.
