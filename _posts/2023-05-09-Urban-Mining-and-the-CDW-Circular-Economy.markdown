@@ -4,7 +4,7 @@ title:  "Urban Mining and the CDW Circular Economy"
 date:   2023-05-09
 categories: jekyll update
 toc: true
-img-url: 2023-05-09-Urban-Mining\
+img-url: 2023-05-09-Urban-Mining-and-the-CDW-Circular-Economy\
 ---
 
 ## Background
