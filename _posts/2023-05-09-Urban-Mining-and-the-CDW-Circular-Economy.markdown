@@ -9,11 +9,19 @@ img-url: 2023-05-09-Urban-Mining-and-the-CDW-Circular-Economy\
 
 ## Background
 
-Urban mining is the process of recovering valuable resources from electronic waste, construction and demolition waste, and other types of urban waste. It is an important concept in the circular economy, which aims to reduce waste, conserve resources, and promote sustainable development. The circular economy seeks to move away from the traditional "take-make-dispose" linear model of production and consumption, and towards a more sustainable model that prioritizes the reuse, recycling, and repurposing of materials.
+Urban mining is the process of recovering valuable resources from what is considered
+waste, such as construction and demolition waste (CDW). It is an important concept that
+supports creation of a circular economy, which aims to reduce waste, conserve
+resources, and promote sustainable development. The circular economy seeks to move
+away from the traditional “take-make-dispose” linear model of production and
+consumption, and towards a more sustainable model that prioritizes the reuse,
+recycling, and repurposing of materials.
 
-Construction and demolition waste (CDW) is a significant source of urban waste, accounting for about one-third of all waste generated in the European Union, for example. CDW includes materials such as concrete, bricks, wood, metals, glass, and plastics, which are often disposed of in landfills or incinerated, leading to environmental problems such as pollution, greenhouse gas emissions, and resource depletion.
-
-The CDW circular economy seeks to address these issues by promoting the recovery, reuse, and recycling of CDW materials. This involves designing buildings and infrastructure for disassembly and recovery, creating markets for recycled materials, promoting deconstruction rather than demolition, and improving the efficiency of waste management systems. By adopting a circular economy approach to CDW, we can reduce waste, conserve resources, and create new economic opportunities, while also reducing environmental impacts and improving sustainability.
+CDW is a significant source of urban waste, estimated in New York State to account for
+46% of the State’s total waste stream (Draft New York State Solid Waste Management
+Plan, pp. 9, 20, at <a href="https://www.dec.ny.gov/docs/materials_minerals_pdf/draftsswmp.pdf">This is a link</a>)
+CDW includes materials such as excavated soil, concrete, bricks, wood, metals and
+glass, much of which are often disposed of in landfills.
 
 <div class="blog-only-image" style="margin-bottom: 20px;">
     <img src="{{ site.blog-img-url }}{{ page.img-url }}Constructions.png">
