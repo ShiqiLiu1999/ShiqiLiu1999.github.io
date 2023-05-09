@@ -36,8 +36,7 @@ yielding a highly flexible and tractable generative model of the data.
 
 <label for="input-box">Total Distance (Mile):</label>
 <input type="text" id="input-box-distance" name="number">
-<button onclick="calculate_transp_cost()">
-<!-- Calculate Transp Cost</button> -->
+<!-- <button onclick="calculate_transp_cost()">Calculate Transp Cost</button> --> -->
 <p id="result"></p>
 
 <label for="input-box">Amount of Material (Ton):</label>
@@ -49,7 +48,7 @@ yielding a highly flexible and tractable generative model of the data.
   function calculate_transp_cost() {
     // Get a reference to the input box
     const inputBox1 = document.getElementById("input-box-distance");
-    const inputBox2 = document.getElementById("input-box-distance");
+    const inputBox2 = document.getElementById("input-box-amt");
 
     // Retrieve the value of the input box
     const dis = inputBox1.value;
