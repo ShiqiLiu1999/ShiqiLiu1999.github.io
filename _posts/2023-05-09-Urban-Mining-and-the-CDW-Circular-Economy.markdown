@@ -66,7 +66,7 @@ component of concrete. We have created a prototype cost and GHG savings
     // Process the input using a formula
     const transp_cost_standard = (dis/4*3.4*Math.ceil(amt/22,0)+amt*44+Math.ceil(amt/22,0)*(dis/30)*100)/amt;
     // const avg_transp_cost_standard = total_transp_cost_standard/amt;
-    const emission_standard = Math.ceil(amt/22,0)*dis/4*1.62772
+    const emission_standard = (Math.ceil(amt/22,0)*dis/4*1.62772)/amt
     // const emission_standard = dis/3.5*3.4*Math.ceil(amt/40,0)+amt*10+Math.ceil(amt/40,0)*dis/25*100;
     // const avg_total_transp_cost_recycled = total_transp_cost_recycled/amt
 
