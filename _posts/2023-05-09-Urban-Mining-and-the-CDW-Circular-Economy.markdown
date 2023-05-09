@@ -4,7 +4,7 @@ title:  "Urban Mining and the CDW Circular Economy"
 date:   2023-05-09
 categories: jekyll update
 toc: true
-img-url: 2023-04-07-DDPM-paper-learning-note\
+img-url: 2023-05-09-Urban-Mining\
 ---
 
 ## Background
@@ -16,7 +16,7 @@ Construction and demolition waste (CDW) is a significant source of urban waste, 
 The CDW circular economy seeks to address these issues by promoting the recovery, reuse, and recycling of CDW materials. This involves designing buildings and infrastructure for disassembly and recovery, creating markets for recycled materials, promoting deconstruction rather than demolition, and improving the efficiency of waste management systems. By adopting a circular economy approach to CDW, we can reduce waste, conserve resources, and create new economic opportunities, while also reducing environmental impacts and improving sustainability.
 
 <div class="blog-only-image">
-    <img src="{{ site.blog-img-url }}{{ page.img-url }}2-1-1.png">
+    <img src="{{ site.blog-img-url }}{{ page.img-url }}Construction.png">
 </div>
 
 
