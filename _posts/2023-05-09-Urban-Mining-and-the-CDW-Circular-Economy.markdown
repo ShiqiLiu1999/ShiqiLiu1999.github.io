@@ -35,8 +35,8 @@ yielding a highly flexible and tractable generative model of the data.
 <input type="text" id="input-box" name="name"> -->
 
 <label for="input-box">Total Distance (Mile):</label>
-<input type="text" id="input-box-distance" name="number">
-<!-- <button onclick="calculate_transp_cost()">Calculate Transp Cost</button> --> -->
+<input type="text" id="input-box-dis" name="number">
+<!-- <button onclick="calculate_transp_cost()">Calculate Transp Cost</button> --> 
 <p id="result"></p>
 
 <label for="input-box">Amount of Material (Ton):</label>
@@ -47,7 +47,7 @@ yielding a highly flexible and tractable generative model of the data.
 <script>
   function calculate_transp_cost() {
     // Get a reference to the input box
-    const inputBox1 = document.getElementById("input-box-distance");
+    const inputBox1 = document.getElementById("input-box-dis");
     const inputBox2 = document.getElementById("input-box-amt");
 
     // Retrieve the value of the input box
@@ -56,9 +56,9 @@ yielding a highly flexible and tractable generative model of the data.
 
     // Process the input using a formula
     const total_transp_cost_standard = dis/4*3.4*Math.ceil(amt/22,0)+amt*12+amt*44+Math.ceil(amt/22,0)*(dis/30)*100;
-    const avg_transp_cost_standard = total_transp_cost_standard/amt;
-    const total_transp_cost_recycled = dis/3.5*3.4*Math.ceil(amt/40,0)+amt*10+Math.ceil(amt/40,0)*dis/25*100;
-    const avg_total_transp_cost_recycled = total_transp_cost_recycled/amt
+    // const avg_transp_cost_standard = total_transp_cost_standard/amt;
+    // const total_transp_cost_recycled = dis/3.5*3.4*Math.ceil(amt/40,0)+amt*10+Math.ceil(amt/40,0)*dis/25*100;
+    // const avg_total_transp_cost_recycled = total_transp_cost_recycled/amt
 
     // Output the result to the user
     const result_total_cost_standard = document.getElementById("total_transp_cost_standard");
