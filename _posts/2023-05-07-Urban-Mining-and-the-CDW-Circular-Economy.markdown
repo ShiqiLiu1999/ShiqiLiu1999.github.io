@@ -1,8 +1,7 @@
 ---
 layout: post
 title:  "Urban Mining and the CDW Circular Economy"
-
-date:   2023-05-07
+date:   2023-05-09
 categories: jekyll update
 toc: true
 img-url: 2023-04-07-DDPM-paper-learning-note\
@@ -27,7 +26,10 @@ In this paper, the author manage to Destory the data by diffusion, and then lear
 yielding a highly flexible and tractable generative model of the data.
 
 
-<label for="input-box">Enter your name:</label>
+<label for="input-box">Total Distance (Mile):</label>
+<input type="text" id="input-box" name="name">
+
+<label for="input-box">Amount of Material (Ton):</label>
 <input type="text" id="input-box" name="name">
 
 
