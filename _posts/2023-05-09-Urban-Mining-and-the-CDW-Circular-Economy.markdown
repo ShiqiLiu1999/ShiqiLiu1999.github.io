@@ -20,6 +20,8 @@ The CDW circular economy seeks to address these issues by promoting the recovery
 </div>
 
 
+
+
 ## Introduction
 
 In this paper, the author manage to Destory the data by diffusion, and then learn a reverse diffusion process that restores structure in data,
@@ -32,29 +34,37 @@ yielding a highly flexible and tractable generative model of the data.
 <label for="input-box">Amount of Material (Ton):</label>
 <input type="text" id="input-box" name="name"> -->
 
-<label for="input-box">Enter a number:</label>
-<input type="text" id="input-box" name="number">
-<button onclick="calculate()">Calculate Square</button>
+<label for="input-box">Total Distance (Mile):</label>
+<input type="text" id="input-box-distance" name="number">
+<button onclick="calculate_transp_cost()">Calculate Transp Cost</button>
+<p id="result"></p>
+
+<label for="input-box">Amount of Material (Ton):</label>
+<input type="text" id="input-box-amt" name="number">
+<button onclick="calculate_transp_cost()">Calculate Transp Cost</button>
 <p id="result"></p>
 
 <script>
-  function calculate() {
+  function calculate_transp_cost() {
     // Get a reference to the input box
-    const inputBox = document.getElementById("input-box");
+    const inputBox1 = document.getElementById("input-box-distance");
+    const inputBox2 = document.getElementById("input-box-distance");
 
     // Retrieve the value of the input box
-    const number = inputBox.value;
+    const dis = inputBox1.value;
+    const amt = inputBox2.value;
 
     // Process the input using a formula
-    const result = number * number;
+    const total_transp_cost_standard = dis/4*3.4*Math.ceil(amt/22,0)+amt*12+amt*44+Math.ceil(amt/22,0)*(dis/30)*100;
+    const avg_transp_cost_standard = total_transp_cost_standard/amt;
+    const total_transp_cost_recycled = dis/3.5*3.4*Math.ceil(amt/40,0)+amt*10+Math.ceil(amt/40,0)*dis/25*100;
+    const avg_total_transp_cost_recycled = total_transp_cost_recycled/amt
 
     // Output the result to the user
-    const resultBox = document.getElementById("result");
-    resultBox.textContent = `The square of ${number} is ${result}.`;
+    const result_total_cost_standard = document.getElementById("total_transp_cost_standard");
+    resultBox.textContent = `The total transportation cost in standard process is ${result_total_cost_standard}.`;
   }
 </script>
-
-
 
 
 
@@ -83,422 +93,3 @@ My study will only focus on the diffusion model part base on the DDPM paper.
 
 In this section, I will follow the idea of the DDPM paper and do the derivation of the diffusion model untill we get the final loss function.
 
-### 3.1 Diffusion Process
-
-- **Objective:** Find an easy way to get {% raw %}$$X_{t}$${% endraw %} directly from  {% raw %}$$X_{0}$${% endraw %}
-
-<div class="blog-only-image">
-    <img src="{{ site.blog-img-url }}{{ page.img-url }}3-1-1.png">
-</div>
-
-The image above is the diffusion process. Intuitively, the diffusion process just simply add noise to the image over and over again
-and finally get a image that follows a standard Gaussian distribution.
-
-Base on the setup of the DDPM paper, the diffusion process will have a fix linear schedule diffusion rate and only add gaussian noise for each diffusion.
-More specifically, we have:
-
-{% raw %}
-$$q(X_t|X_{t-1}) = \mathcal{N}(X_{t}; \sqrt{\alpha_t}X_{t-1}, (1-\alpha_t) \textbf{I})$$
-{% endraw %}
-
-Therefore, there is a recursive relation to the {% raw %}$$X_{t}$${% endraw %} and {% raw %}$$X_{t-1}$${% endraw %}, which is:
-
-{% raw %}
-$$X_t = \sqrt{\alpha_t} X_{t-1} + \sqrt{1 - \alpha_t}\epsilon_t, \epsilon_t \sim \mathcal{N}(0,\textbf{I})$$
-{% endraw %}
-
-Naively, we can get any {% raw %}$$X_{t}$${% endraw %} recursively from {% raw %}$$X_{0}$${% endraw %}, but it is not efficient.
-Therefore, we will try to find a general form.
-
-We can replace {% raw %}$$X_{t-1}$${% endraw %} with the recursive formular and see what we will get:
-
-{% raw %}
-$$\begin{aligned}
-X_t &=  \sqrt{\alpha_t} X_{t-1} + \sqrt{1 - \alpha_t}\epsilon_t \\
-&= \sqrt{\alpha_t} (\sqrt{\alpha_{t-1}} X_{t-2} + \sqrt{1 - \alpha_{t-1}}\epsilon_{t-1}) + \sqrt{1 - \alpha_t}\epsilon_t \\
-&= \sqrt{\alpha_t \alpha_{t-1}}  X_{t-2} + \sqrt{\alpha_t - \alpha_t \alpha_{t-1}}\epsilon_{t-1} + \sqrt{1-\alpha_t}\epsilon_t
-\end{aligned}$$
-{% endraw %}
-
-The coefficient of {% raw %}$$X_{t-2}$${% endraw %} is simple, but how to deal with the remaining two components?
-Recall that {% raw %}$$\epsilon_{t-1}$${% endraw %} and {% raw %}$$\epsilon_{t}$${% endraw %} are both following the standard Gaussian.
-Therefore, we have:
-
-{% raw %}
-$$\sqrt{\alpha_t - \alpha_t \alpha_{t-1}}\epsilon_{t-1} \sim \mathcal{N}(0,(\alpha_t - \alpha_t \alpha_{t-1})\textbf{I})$$
-{% endraw %}
-
-{% raw %}
-$$\sqrt{1-\alpha_t}\epsilon_t \sim \mathcal{N}(0,(1-\alpha_t)\textbf{I})$$
-{% endraw %}
-
-Which means that we can combine the two noise in the following way:
-
-{% raw %}
-$$\begin{aligned}
-X_t &= \sqrt{\alpha_t \alpha_{t-1}}  X_{t-2} + \sqrt{\alpha_t - \alpha_t \alpha_{t-1}}\epsilon_{t-1} + \sqrt{1-\alpha_t}\epsilon_t\\
-&=\sqrt{\alpha_t \alpha_{t-1}}  X_{t-2} + \sqrt{1 - \alpha_t \alpha_{t-1}}\epsilon
-\end{aligned}$$
-{% endraw %}
-
-Then, we can do the same thing for T-1 times and we will get the following:
-
-{% raw %}
-$$\begin{aligned}
-X_t&=\sqrt{\alpha_t \alpha_{t-1} \dots \alpha_{1}}  X_{0} + \sqrt{1 - \alpha_t \alpha_{t-1} \dots \alpha_{1}}\epsilon\\
-&= \sqrt{\overline{\alpha}_t}  X_{0} + \sqrt{1 -\overline{\alpha}_t}\epsilon
-\end{aligned}$$
-{% endraw %}
-
-Meaning that:
-
-{% raw %}
-$$X_t \sim \mathcal{N}(X_t; \sqrt{\overline{\alpha}_t}X_0, (1-\overline{\alpha_t})\textbf{I})$$
-{% endraw %}
-
-{% raw %}
-$$q(X_t|X_0) = \mathcal{N}(X_t; \sqrt{\overline{\alpha}_t}X_0, (1-\overline{\alpha_t})\textbf{I})$$
-{% endraw %}
-
-So far, the forward diffusion process is completely known by us because we can get any distribution of the
-middle state as long as we want.
-
-The next step is to figure out the distribution of the reverse process for the sake of training the reverse model.
-
-### 3.2 Reverse Process
-
-- **Objective:** Find {% raw %}
-$$q(X_{t-1}|X_{t})$$
-{% endraw %}
-
-Using the Bayes Theorem, we can transfor the reverse distribution to the combination of forward distribution:
-
-{% raw %}
-$$\begin{aligned}
-q(X_{t-1}|X_t,X_0) &= \frac{q(X_t|X_{t-1},X_0)q(X_{t-1}|X_0)}{q(X_{t}|X_0)}
-\end{aligned}$$
-{% endraw %}
-
-Form the forward process analysis, we know that:
-
-{% raw %}
-$$q(X_t|X_{t-1},X_0) \sim \mathcal{N}(X_{t}; \sqrt{\alpha_t}X_{t-1}, (1-\alpha_t) \textbf{I})$$
-{% endraw %}
-
-{% raw %}
-$$q(X_{t-1}|X_0) \sim \mathcal{N}(X_{t-1}; \sqrt{\overline{\alpha}_{t-1}}X_{0}, (1-\overline{\alpha}_{t-1}) \textbf{I})$$
-{% endraw %}
-
-{% raw %}
-$$q(X_{t}|X_0) \sim \mathcal{N}(X_{t}; \sqrt{\overline{\alpha}_t} X_{0}, (1-\overline{\alpha}_t) \textbf{I})$$
-{% endraw %}
-
-Replace them with the Gaussian expression, we will have:
-
-{% raw %}
-$$\begin{aligned}
-    &q(X_{t-1}|X_t,X_0) \\
-    &= \frac{q(X_t|X_{t-1},X_0)q(X_{t-1}|X_0)}{q(X_{t}|X_0)}\\
-    &\propto exp(-\frac{1}{2}(
-    \frac{(X_t - \sqrt{\alpha_t}X_{t-1})^2}{1-\alpha_t} + \frac{(X_{t-1} - \sqrt{\overline{\alpha}_t}X_{0})^2}{1-\overline{\alpha}_{t-1}} - 
-    \frac{(X_t - \sqrt{\overline{\alpha}_t}X_{0})^2}{1-\overline{\alpha}_{t}}))\\
-    &= exp(-\frac{1}{2}(
-    \frac{X_t^2 - 2\sqrt{\alpha_t}X_t X_{t-1} + \alpha_tX_{t-1}^2}{1-\alpha_t}
-    + \frac{X_{t-1}^2 - 2\sqrt{\overline{\alpha}}_{t-1}X_{0} X_{t-1} + \overline{\alpha}_{t-1} X_{0}^2}{1-\overline{\alpha}_{t-1}}-\frac{(X_t - \sqrt{\overline{\alpha}_t}X_{0})^2}{1-\overline{\alpha}_{t}})\\
-    &= exp(-\frac{1}{2}(
-    (\frac{\alpha_t}{1- \alpha_t} + \frac{1}{1- \overline{\alpha}_{t-1}})X_{t-1}^2
-    - (\frac{2\sqrt{\alpha_t}}{1-\alpha_t}X_{t} + \frac{2\sqrt{\overline{\alpha}_{t-1}}}{1-\overline{\alpha}_{t-1}}X_0)X_{t-1}
-    + C(X_t,X_0)
-    ))
-    \end{aligned}$$
-{% endraw %}
-
-Be aware that we are looking for the distribution over {% raw %}$$X_{t-1}$${% endraw %}, which means that our goal is to find the mean and varient of it.
-Now, recall the basic form of a Gaussian distribution:
-
-{% raw %}
-$$exp(-\frac{(x-\mu)^2}{2\sigma^2}) = exp(-\frac{1}{2}(\frac{1}{\sigma^2}x^2 - \frac{2\mu}{\sigma^2}x + \frac{\mu^2}{\sigma^2}))$$
-{% endraw %}
-
-Compare those two formular, we can have the following equation to solve the mean and varient:
-
-{% raw %}
-$$\begin{cases}
-\frac{1}{\sigma_t^2} = \frac{\alpha_t}{1- \alpha_t} + \frac{1}{1- \overline{\alpha}_{t-1}}\\
-\frac{2\tilde{\mu}_{t}(X_t,X_0)}{\sigma_t^2} = \frac{2\sqrt{\alpha_t}}{1-\alpha_t}X_{t} + \frac{2\sqrt{\overline{\alpha}_{t-1}}}{1-\overline{\alpha}_{t-1}}X_0\\
-X_t = \sqrt{\overline{\alpha}_t}  X_{0} + \sqrt{1 -\overline{\alpha}_t}\epsilon
-\end{cases}$$
-{% endraw %}
-
-Therefore,
-
-{% raw %}
-$$\begin{cases}\tilde{\mu}_{t}(X_t,X_0) = \frac{1}{\sqrt{\alpha_t}} (X_t - \frac{1-\alpha_t}{\sqrt{1-\overline{\alpha}_t}}\epsilon_t)\\
-\sigma_t^2 = \frac{(1-\alpha_t)(1-\overline{\alpha}_{t-1})}{1-\alpha_t\overline{\alpha}_{t-1}}\end{cases}$$
-{% endraw %}
-
-So far, we have got the distribution of the reverse process. Next step is to figure out a way to train the reverse model.
-
-### 3.3 Training
-
-Before we start working with the loss function, we need to understand "KL divergence":
-- KL divergence compares two different distribution.
-- KL divergence lower bounded by 0
-
-Supposed we have two pdf function f(x) and g(x), the KL divergence between then should be:
-
-{% raw %}
-$$\begin{aligned}
-D_{KL}(f(x)||g(x)) &= \int f(x) \log(\frac{f(x)}{g(x)})dx\\
-&= - \int f(x) \log(\frac{g(x)}{f(x)}) dx\\
-& \ge - \int f(x) (\frac{g(x)}{f(x)} - 1) dx\\
-&= - \int g(x) - f(x) dx\\
-&= 0 
-\end{aligned}$$
-{% endraw %}
-
-Now, we have a way to compare two distribution. Recall that we want the trained model able to generate a distribution {% raw %}
-$$p_{\theta}(X')$$
-{% endraw %} which is as close as the original dataset distribution {% raw %}
-$$q(X)$$
-{% endraw %}. Therefore, we can use the KL divergence between those two distribution as our objective:
-
-{% raw %}
-$$\begin{aligned}
-D_{KL}(q(X_0)||p_{\theta}(X_0)) &= \int q(X_0) \log[\frac{q(X_0)}{p_{\theta}(X_0)}]d(X_0)\\
-&= \int q(X_0) \log[q(X_0)]d(X_0) - \int q(X_0) \log[p_{\theta}(X_0)]d(X_0)\\
-&= - \mathcal{H}(q(X_0)) + \mathcal{H}(q(X_0), p_{\theta}(X_0))
-\end{aligned}$$
-{% endraw %}
-
-Because {% raw %}$$q(X_0)$${% endraw %} is a distribution of dataset, it is fixed, so as its entropy {% raw %}$$\mathcal{H}(q(X_0))$${% endraw %},
-to minimize the given kl divergence, we just need to deal with the cross entropy {% raw %}$$\mathcal{H}(q(X_0), p_{\theta}(X_0))$${% endraw %}.
-
-{% raw %}
-$$\begin{aligned}
-\mathcal{H}(q(X_0), p_{\theta}(X_0)) &= - \int q(X_0)\log[p_{\theta}(X_0)]d(X_0)\\
-&= - \mathbb{E}_{q(X_0)} \log p_{\theta}(X_0)\\
-&= -\mathbb{E}_{q(X_0)}\log [\int p_{\theta}(X_{0:T}) d(X_{1:T})]\\
-&= -\mathbb{E}_{q(X_0)}\log [\int q(X_{1:T} | X_0) \frac{p_{\theta}(X_{0:T})}{ q(X_{1:T} | X_0)} d(X_{1:T})]\\
-&= -\mathbb{E}_{q(X_0)} \log[\mathbb{E}_{q(X_{1:T}| X_0)}\frac{p_{\theta}(X_{0:T})}{ q(X_{1:T} | X_0)}]
-\end{aligned}$$
-{% endraw %}
-
-Recall the Jensen's inequality. For any convex function, we have:
-
-{% raw %}
-$$\mathcal{\varphi}[\mathbb{E}(X)] \leq \mathbb{E}[\mathcal{\varphi}(X)]$$
-{% endraw %}
-
-Here, we will apply the Jensen's inequality to find the upper bound of this cross entropy:
-
-{% raw %}
-$$\begin{aligned}
-\mathcal{H}(q(X_0), p_{\theta}(X_0)) &=  -\mathbb{E}_{q(X_0)} \log[\mathbb{E}_{q(X_{1:T}| X_0)}\frac{p_{\theta}(X_{0:T})}{ q(X_{1:T} | X_0)}]\\
-& \leq  -\mathbb{E}_{q(X_0)} \mathbb{E}_{q(X_{1:T}| X_0)}\log[\frac{p_{\theta}(X_{0:T})}{ q(X_{1:T} | X_0)}]\\
-&= -\mathbb{E}_{q(X_{0:T})} \log[\frac{p_{\theta}(X_{0:T})}{ q(X_{1:T} | X_0)}]\\
-&= \mathbb{E}_{q(X_{0:T})} [\log\frac{ q(X_{1:T} | X_0)}{p_{\theta}(X_{0:T})}]\\
-\end{aligned}$$
-{% endraw %}
-
-Since the upper bound is still a join distribution, not friendly enough, we use the Morkov chain property and keep moving forward:
-
-{% raw %}
-$$\begin{aligned}
-& \mathbb{E}_{q(X_{0:T})} [\log\frac{ q(X_{1:T} | X_0)}{p_{\theta}(X_{0:T})}] \\
-&= \mathbb{E}_{q} [\log\frac{\Pi_{t=1}^{T}q(X_t|X_{t-1})}{p_{\theta}(X_T)\Pi_{t=1}^{T}p_{\theta}(X_{t-1} | X_t)}]\\
-&= \mathbb{E}_{q} [-\log p_{\theta}(X_T) + \sum_{t=1}^{T}\log\frac{q(X_t|X_{t-1})}{p_{\theta}(X_{t-1} | X_t)}]\\
-&= \mathbb{E}_{q} [-\log p_{\theta}(X_T) + \sum_{t=2}^{T}\log\frac{q(X_t|X_{t-1})}{p_{\theta}(X_{t-1} | X_t)} + \log \frac{q(X_1|X_0)}{p_{\theta}(X_0 | X_1)}]\\
-&= \mathbb{E}_{q} [-\log p_{\theta}(X_T) + \sum_{t=2}^{T}\log(\frac{q(X_{t-1}|X_t, X_0)}{p_{\theta}(X_{t-1} | X_t)} \frac{q(X_t|X_0)}{q(X_{t-1}|X_0)}) + \log \frac{q(X_1|X_0)}{p_{\theta}(X_0 | X_1)}]\\
-&= \mathbb{E}_{q} [-\log p_{\theta}(X_T) + \sum_{t=2}^{T}\log\frac{q(X_{t-1}|X_t, X_0)}{p_{\theta}(X_{t-1} | X_t)} + \sum_{t=2}^{T}\log \frac{q(X_t|X_0)}{q(X_{t-1}|X_0)} + \log \frac{q(X_1|X_0)}{p_{\theta}(X_0 | X_1)}]\\
-&= \mathbb{E}_{q} [-\log p_{\theta}(X_T) + \sum_{t=2}^{T}\log\frac{q(X_{t-1}|X_t, X_0)}{p_{\theta}(X_{t-1} | X_t)} + \log \frac{q(X_T|X_0)}{q(X_1|X_0)} + \log \frac{q(X_1|X_0)}{p_{\theta}(X_0 | X_1)}]\\
-&= \mathbb{E}_{q} [-\log p_{\theta}(X_T) + \sum_{t=2}^{T}\log\frac{q(X_{t-1}|X_t, X_0)}{p_{\theta}(X_{t-1} | X_t)} + \log \frac{q(X_T|X_0)}{p_{\theta}(X_0 | X_1)}]\\
-&= \mathbb{E}_{q} [\log \frac{q(X_T|X_0)}{p_{\theta}(X_T)} + \sum_{t=2}^{T}\log\frac{q(X_{t-1}|X_t, X_0)}{p_{\theta}(X_{t-1} | X_t)} - \log p_{\theta}(X_0 | X_1)]\\
-&= \mathbb{E}_{q} 
-[\begin{matrix} \underbrace{D_{KL}(q(X_T|X_0)||p_{\theta}(X_T))} \\ L_T \end{matrix} 
-
-+ \begin{matrix} \underbrace{\sum_{t=2}^{T} D_{KL}(q(X_{t-1}|X_t, X_0)||p_{\theta}(X_{t-1} | X_t)) } \\ L_{T-1 : 1} \end{matrix} + 
- \begin{matrix} \underbrace{- \log p_{\theta}(X_0 | X_1)}\\ L_{0} \end{matrix}]
-  \end{aligned}$$
-  {% endraw %}
-
-Now the upper bound of the crocess entropy can be written as:
-
-{% raw %}
-$$\mathcal{H}(q(X_0), p_{\theta}(X_0)) \leq L_T + L_{T-1} + L_{T-2} + \dots + L_0$$
-{% endraw %}
-
-where:
-
-{% raw %}
-$$\begin{aligned}
-L_T &= D_{KL}(q(X_T|X_0)||p_{\theta}(X_T))\\
-L_{t-1} &= D_{KL}(q(X_{t-1}|X_t, X_0)||p_{\theta}(X_{t-1} | X_t)), 2 \leq t \leq T\\
-L_{0} &= - \log p_{\theta}(X_0 | X_1)\\
-\end{aligned}$$
-{% endraw %}
-
-For {% raw %}$$L_T$${% endraw %}, recall that {% raw %}$$p_{\theta}(X_T))$${% endraw %} is a standard Gassian,
-it has nothing to do with {% raw %}$$\theta$${% endraw %}.Therefore, we don't need to put it into consideration.
-
-For {% raw %}$$L_0$${% endraw %}, it is the final step of the reverse process of the generative model, we can treat it as
-a decoder to decode {% raw %}$$X_1$${% endraw %} to {% raw %}$$X_0$${% endraw %}. We can sample it from a Gaussian distribution
-{% raw %}$$\mathcal{N}(X_{0}; \mu_{\theta}(X_1,1), \sigma_{1}^2 \textbf{I})$${% endraw %} after we trained a model.
-
-Therefore, our goal is to minimize {% raw %}$$L_{1 : T-1}$${% endraw %} so as to minimize the upper bound of the cross entropy.
-
-{% raw %}$$L_{1 : T-1}$${% endraw %} is the KL divergence of the two reverse distributions between the one get from the dataset
-{% raw %}$$q(X_T|X_0)$${% endraw %} and the one generated by the model {% raw %}$$p_{\theta}(X_T)$${% endraw %}.
-
-Because they are both Gaussian distribution with the same varience, we can compare their mean. The loss function can be written as:
-
-{% raw %}
-$$\begin{aligned}
-\mathcal{L}_t &= \mathbb{E}_{X_0,\epsilon}[
-\frac{1}{2||\Sigma_{\theta}(X_t,t)||_2^2}
-||\tilde{\mu}_t(X_t, X_0) - \mu_{\theta}(X_t,t)||^2
-]\\
-&= \mathbb{E}_{X_0,\epsilon}[
-\frac{1}{2||\Sigma_{\theta}(X_t,t)||_2^2}
-||\frac{1}{\sqrt{\alpha_t}} (X_t - \frac{1-\alpha_t}{\sqrt{1-\overline{\alpha}_t}}\epsilon_t) - \frac{1}{\sqrt{\alpha_t}} (X_t - \frac{1-\alpha_t}{\sqrt{1-\overline{\alpha}_t}}\epsilon_{\theta}(X_t,t))||^2
-]\\
-&= \mathbb{E}_{X_0,\epsilon}[
-\frac{\beta_t^2}{2\alpha_t(1-\overline{\alpha}_t)||\Sigma_{\theta}||^2_2}
-||\epsilon_t - \epsilon_{\theta}(X_t,t)||^2
-]\\
-&= \mathbb{E}_{X_0,\epsilon}[
-\frac{\beta_t^2}{2\alpha_t(1-\overline{\alpha}_t)||\Sigma_{\theta}||^2_2}
-||\epsilon_t - \epsilon_{\theta}(\sqrt{\overline{\alpha}_t} X_0 + \sqrt{1- \overline{\alpha}_t}\epsilon_t,t)||^2
-]\\
-\end{aligned}$$
-{% endraw %}
-
-Here, we use the **reparameterization trick** in the loss function, which transfer the training variable
-from {% raw %}$$\mu_{\theta}$${% endraw %} to {% raw %}$$\epsilon_{\theta}$${% endraw %}.
-
-The reason to do that is quite straight forward. It has a better training result.
-
-<div class="blog-only-image">
-    <img src="{{ site.blog-img-url }}{{ page.img-url }}3-3-1.png">
-</div>
-
-We can see that, overall,  the IS score is greater and the FDI score is smaller when we train over {% raw %}$$\epsilon_{\theta}$${% endraw %}.
-
-Furthermore, in the phesis paper itself, it has the following statement to further explain the reason:
-
-<div class="blog-quote">
-    “We have shown that the є-prediction parameterization both resembles Langevin dynamics and
-    simplifies the diffusionmodel’s variational bound to an objective that resembles denoising score matching.”
-</div>
-
-Finally, we have a loss function, then we need to wrap up and find an algorithm to actually do our training.
-
-This algorithm has two saperate part, Training and Sampling.
-
-<div class="blog-only-image">
-    <img src="{{ site.blog-img-url }}{{ page.img-url }}3-3-2.png">
-</div>
-
-For the Training part, we will sample several images from the dataset and do diffusion over them. The time schedule t will
-randomly sample from a Uniform distribution so that we are able to have a datase with different diffusion step for the model to learn.
-After the training, the model will be able to generate any {% raw %}$$\epsilon_{t}$${% endraw %} given {% raw %}$$X_{t}$${% endraw %} and t.
-
-<div class="blog-only-image">
-    <img src="{{ site.blog-img-url }}{{ page.img-url }}3-3-3.png">
-</div>
-
-For the Sampling part, we can make use of the trained model to get any noise that we added to step t, so that we can calculate the step t-1 image
-with the formular we get from the reverse process analysis. Do it for many times, we will finally get an image that higely follow the original distribution
-of the dataset.
-
-
-Congratulations! we have derived the loss function of the magical diffusion model!
-
-<br/>
-## 4.Summery of Derication
-
-Now, let's briefly overview what we have done:
-- **Diffusion process**: Figure out the expression of
-{% raw %}$$q(X_t | X_0)$${% endraw %}
-, the general term formula.
-- **Reverse process**: Figure out the expression of
-{% raw %}$$q(X_{t-1}| X_{t}, X_0)$${% endraw %}.
-- **Training**:
-    - **Objective**: Find
-    {% raw %}$$p_{\theta}(X_0)$${% endraw %} as close as {% raw %}$$q(X_0)$${% endraw %}
-    - **Steps**:
-        - Minimize
-        {% raw %}$$D_{KL}(q(X_0)||p_{\theta}(X_0))$${% endraw %} 
-        - Minimize
-        {% raw %}$$\mathcal{H}(q(X_0), p_{\theta}(X_0))$${% endraw %} 
-        - Jensen's inequality, find the upper bound.
-        - {% raw %}$$\mathcal{H}(q(X_0), p_{\theta}(X_0))$${% endraw %} bounded by {% raw %}$$\sum_{t=0}^T L_{t}$${% endraw %} which is the sum of {% raw %}$$D_{KL}$${% endraw %}
-        - Minimize
-        {% raw %}$$D_{KL}(q(X_{t-1}|X_t, X_0)||p_{\theta}(X_{t-1} | X_t))$${% endraw %}, which is the same to minimize the difference of mean.
-        - Do reparameterization to loss function and train the model over the noise variable {% raw %}$$\epsilon$${% endraw %}.
-        - Train the model and use the model to generate image from pure standard Gaussian noise. 
-
-<br/>
-## 5.Experiements
-
-In the section, I will share some of the results of the experiements they did in the DDPM paper.
-
-- **Basic setup**:
-    - Set T = 1000 for all experiments, meaning we will diffuse at most 1000 times.
-    - Set the forward process variances to constants increasing linearly from
-    {% raw %}$$\beta_1 = 10^{-4}$${% endraw %} to {% raw %}$$βT = 0.02$${% endraw %}. Making sure that
-    {% raw %}$$D_{KL}(q(X_{t-1}|X_t, X_0)||p_{\theta}(X_{t-1} | X_t))$${% endraw %}
-    - Using Unet as the architacture of the training model.
-
-Unet is a encoder and decoder using Convolutional neural network architecture. The special point of this structure is
-that it includes four Skip connections which can carry the original feature from the encoder to the decoder in the same level.
-
-<div class="blog-only-image">
-    <img src="{{ site.blog-img-url }}{{ page.img-url }}4-1-1.png">
-</div>
-
-<br/>
-- **Comparison between p(x) and q(x’)**
-
-This experiement using LSUN dataset, which includes several classes of 256 * 256 image. The following image shows the FID score
-between the dataset distribution and the generated distribution.
-
-<div class="blog-only-image">
-    <img src="{{ site.blog-img-url }}{{ page.img-url }}4-1-2.png">
-</div>
-
-The FID scores of the model are 7.89 on Church datas and 4.90 on Bedroom datas, which is low enough to show how similar the generated
-distribution and the original distribution is.
-
-- **Prograssive Generation**
-    - model was trained on CIFAR10 dataset.
-    - The leftmost are samples from
-    - The rightmost are images that generated by the trained model.
-
-<div class="blog-only-image">
-    <img src="{{ site.blog-img-url }}{{ page.img-url }}4-1-3.png">
-</div>
-
-This result shows us the middle states of the generative process, from which we can have a clear view of how the noise is being removed step by step.
-
-- **Reverse from different steps of diffusion.**
-    - Using CelebA-HQ 256 × 256 dataset
-    - For each set, the one from bottom right is the diffused image.
-    - The other three are generated from the model given the bottom right one.
-    - The diffused image of each set has different time of diffusion.
-    - From left to right, the times of diffusion for the diffused images are :T=1000, 750, 500 250, 0.
-
-<div class="blog-only-image">
-    <img src="{{ site.blog-img-url }}{{ page.img-url }}4-1-4.png">
-</div>
-
-This experiements actually shows the high IS score in a visiable way. When given a more specific input (other than a pure Gaussian noise), the more accuate the model can generate.
-
-- **My training result**
-    - Dataset: Fashion-MNIST
-    - Code reference: https://huggingface.co/blog/annotated-diffusion  (This excellent blog also includes good explainations for all the codes.)
-    - You can play with the code in google colab (The training only take about 10 minute if suing the colab GPU):
-
-<a target="_blank" href="https://colab.research.google.com/drive/1rtgxEkAHon3KvobGvFjbHQlpFlIdcBVD?usp=sharing">
-    <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab">
-</a>
