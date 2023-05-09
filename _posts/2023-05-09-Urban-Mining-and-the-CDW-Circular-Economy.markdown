@@ -39,15 +39,15 @@ In addition to transportation costs, we also calculate GHG emissions. To calcula
 <label for="input-box">Amount of Material (Ton):</label>
 <input type="text" id="input-box" name="name"> -->
 
-<label for="input-box">Total Distance (Mile):</label>
+<label for="input-box-dis">Total Distance (Mile):</label>
 <input type="text" id="input-box-dis" name="number">
-<!-- <button onclick="calculate_transp_cost()">Calculate Transp Cost</button> --> 
-<p id="result"></p>
+<button onclick="calculate_transp_cost()">Calculate Transp Cost</button> 
+<p id="result_total_cost_standard"></p>
 
-<label for="input-box">Amount of Material (Ton):</label>
+<label for="input-box-amt">Amount of Material (Ton):</label>
 <input type="text" id="input-box-amt" name="number">
 <button onclick="calculate_transp_cost()">Calculate Transp Cost</button>
-<p id="result"></p>
+<p id="result_total_cost_recycled"></p>
 
 <script>
   function calculate_transp_cost() {
@@ -62,14 +62,19 @@ In addition to transportation costs, we also calculate GHG emissions. To calcula
     // Process the input using a formula
     const total_transp_cost_standard = dis/4*3.4*Math.ceil(amt/22,0)+amt*12+amt*44+Math.ceil(amt/22,0)*(dis/30)*100;
     // const avg_transp_cost_standard = total_transp_cost_standard/amt;
-    // const total_transp_cost_recycled = dis/3.5*3.4*Math.ceil(amt/40,0)+amt*10+Math.ceil(amt/40,0)*dis/25*100;
+    const total_transp_cost_recycled = dis/3.5*3.4*Math.ceil(amt/40,0)+amt*10+Math.ceil(amt/40,0)*dis/25*100;
     // const avg_total_transp_cost_recycled = total_transp_cost_recycled/amt
 
     // Output the result to the user
-    const result_total_cost_standard = document.getElementById("total_transp_cost_standard");
-    result_total_cost_standard.textContent = `The total transportation cost in standard process is ${result_total_cost_standard}.`;
+
+    const result_total_cost_standard = document.getElementById("result_total_cost_standard");
+    result_total_cost_standard.textContent = `The total transportation cost in standard process is $${total_transp_cost_standard}.`;
+    
+    const result_total_cost_recycled = document.getElementById("result_total_cost_recycled");
+    result_total_cost_recycled.textContent = `The total transportation cost in recycled process is $${total_transp_cost_recycled}.`;
   }
+
 </script>
 
 
-## Sensitivity Analysis (Jamaca Hospital Case)
+## Sensitivity Analysis (Jamaica Hospital Case)
