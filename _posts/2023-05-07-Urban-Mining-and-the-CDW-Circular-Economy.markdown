@@ -21,11 +21,6 @@ The CDW circular economy seeks to address these issues by promoting the recovery
     <div>
         <img src= "{{ site.blog-img-url }}{{ page.img-url }}1-1.png">
     </div>
-    <div>
-        <legend><b>Keywords:</b><br> imple logo, ice shard and magic symbols in the style
-            of Paul Randsimple design, 2d vector minimalist logo,
-            black and white, clean lines --upbeta --v 4 --s 50</legend>
-    </div>
 </div>
 <br/>
 <div class = "blog-image">
@@ -40,7 +35,7 @@ The CDW circular economy seeks to address these issues by promoting the recovery
 
 <br/>
 
-# Introduction
+## Introduction
 
 
 
