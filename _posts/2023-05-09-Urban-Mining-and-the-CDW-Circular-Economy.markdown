@@ -32,6 +32,7 @@ To determine the transportation cost, we factor in various expenses such as fuel
 In addition to transportation costs, we also calculate GHG emissions. To calculate GHG emissions, we multiply the amount of fuel used by 0.43, based on the estimate by the U.S. Environmental Protection Agency (EPA) that diesel fuel produces approximately 0.43 kg of CO2 emissions per liter. This calculation provides us with the average GHG emissions per ton of material.
 
 
+## Calculator
 <!-- <label for="input-box">Total Distance (Mile):</label>
 <input type="text" id="input-box" name="name">
 
@@ -70,3 +71,5 @@ In addition to transportation costs, we also calculate GHG emissions. To calcula
   }
 </script>
 
+
+## Sensitivity Analysis (Jamaca Hospital Case)
