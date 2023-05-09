@@ -90,7 +90,7 @@ component of concrete. We have created a prototype cost and GHG savings
 <input type="text" id="input-box-dis2" name="number">
 <p id="result_avg_cost_recycled"></p>
 
-<label for="input-box-total_amt">Amount of Material (Ton):</label>
+<label for="input-box-amt">Amount of Material (Ton):</label>
 <input type="text" id="input-box-total_amt" name="number">
 
 <p id="result_emission_recycled"></p>
