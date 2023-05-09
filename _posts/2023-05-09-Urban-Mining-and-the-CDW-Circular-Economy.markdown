@@ -36,7 +36,8 @@ yielding a highly flexible and tractable generative model of the data.
 
 <label for="input-box">Total Distance (Mile):</label>
 <input type="text" id="input-box-distance" name="number">
-<button onclick="calculate_transp_cost()">Calculate Transp Cost</button>
+<button onclick="calculate_transp_cost()">
+<!-- Calculate Transp Cost</button> -->
 <p id="result"></p>
 
 <label for="input-box">Amount of Material (Ton):</label>
