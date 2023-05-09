@@ -66,30 +66,3 @@ yielding a highly flexible and tractable generative model of the data.
   }
 </script>
 
-
-
-### 2.3 Hierarchical Text-Conditional Image Generation with CLIP Latents (2022)
-This is a paper for the well-known OpenAI project "DALL-E2". Even though the we don't know what model "Midjourney" is using, we can fairly predict that they are
-using the similar model like "DALL-E2" because the input and output of them are similar.
-
-The following is the architacture of the "DALL-E2" model.
-
-<div class="blog-only-image">
-    <img src="{{ site.blog-img-url }}{{ page.img-url }}2-3-1.png">
-</div>
-
-<div class="blog-quote">
-    “A high-level overview of unCLIP. Above the dotted line, we depict the CLIP training process,
-through which we learn a joint representation space for text and images. Below the dotted line, we depict our
-text-to-image generation process: a CLIP text embedding is first fed to an autoregressive or diffusion prior
-to produce an image embedding, and then this embedding is used to condition a diffusion decoder which
-produces a final image. Note that the CLIP model is frozen during training of the prior and decoder”
-</div>
-
-My study will only focus on the diffusion model part base on the DDPM paper.
-
-<br/>
-## 3.Derivation of Diffusion Model
-
-In this section, I will follow the idea of the DDPM paper and do the derivation of the diffusion model untill we get the final loss function.
-
