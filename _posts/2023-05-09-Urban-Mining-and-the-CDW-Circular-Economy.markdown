@@ -45,7 +45,7 @@ component of concrete. We have created a prototype cost and GHG savings
 
 <label for="input-box-dis">Total Distance (Mile):</label>
 <input type="text" id="input-box-dis" name="number">
-<button onclick="calculate_std_process()">Transp Cost-Standard Process</button> 
+<!-- <button onclick="calculate_std_process()">Transp Cost-Standard Process</button>  -->
 <p id="result_avg_cost_standard"></p>
 
 <label for="input-box-amt">Amount of Material (Ton):</label>
