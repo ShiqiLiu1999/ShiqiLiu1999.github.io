@@ -29,7 +29,7 @@ York..
 
 The model for the hypothetical case study (<a href="https://docs.google.com/spreadsheets/d/1439GZQQ7Zko0tlztk9GlA12wQrmT_APnIGqUQmlOEc4/edit#gid=416468233">Rock Tech</a>) uses data for various expenses such as fuel cost, tipping/disposal fee and disposal costs, and trucking costs and truck weight limits, along with milage, to determine the transportation costs of the two options. The model also calculates GHC emissions associated with the two options, which to determine GHG emissions savings of the local CDW re-use option. The GHG emissions calculation was based on the estimate by the U.S. Environmental Protection Agency (EPA) that diesel fuel produces approximately 0.43 kg of CO2 emissions per liter and permitted us to calculate the average GHG emissions per ton of material.
 
-<div class="blog-only-image">
+<div class="blog-only-image" style="margin-bottom: 20px;">
     <img src="{{ site.blog-img-url }}{{ page.img-url }}Truck.png">
 </div>
 
