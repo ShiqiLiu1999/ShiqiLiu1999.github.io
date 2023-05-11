@@ -46,12 +46,13 @@ component of concrete. We have created a prototype cost and GHG savings
 <label for="input-box-dis">Total Distance (Mile):</label>
 <input type="text" id="input-box-dis" name="number">
 <!-- <button onclick="calculate_std_process()">Transp Cost-Standard Process</button>  -->
-<p id="result_avg_cost_standard"></p>
 
 <label for="input-box-amt">Amount of Material (Ton):</label>
 <input type="text" id="input-box-amt" name="number">
 <button onclick="calculate_std_process()">Get Transportation Cost and Emission</button>
+
 <p id="result_emission_standard"></p>
+<p id="result_avg_cost_standard"></p>
 
 <script>
   function calculate_std_process() {
@@ -88,16 +89,16 @@ component of concrete. We have created a prototype cost and GHG savings
 
 <label for="input-box-dis2">Distance_2 (Mile):</label>
 <input type="text" id="input-box-dis2" name="number">
-<p id="result_avg_cost_recycled"></p>
 
 <label for="input-box-total_amt">Amount of Material (Ton):</label>
 <input type="text" id="input-box-total_amt" name="number">
 
-<p id="result_emission_recycled"></p>
-
 <label for="input-box-p"> Percent of Sand from Soil (Ton):</label>
 <input type="text" id="input-box-p" name="number">
 <button onclick="calculate_recycled_process()">Get Transportation Cost and Emission</button>
+
+<p id="result_avg_cost_recycled"></p>
+<p id="result_emission_recycled"></p>
 
 <script>
   function calculate_recycled_process() {
