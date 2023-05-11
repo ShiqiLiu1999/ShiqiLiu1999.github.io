@@ -51,8 +51,8 @@ component of concrete. We have created a prototype cost and GHG savings
 <input type="text" id="input-box-amt" name="number">
 <button onclick="calculate_std_process()">Get Transportation Cost and Emission</button>
 
-<p id="result_emission_standard"></p>
 <p id="result_avg_cost_standard"></p>
+<p id="result_emission_standard"></p>
 
 <script>
   function calculate_std_process() {
